@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Speed Read Race</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#14213d; --panel:#1f2f57; --edge:#33467d; --card:#fffdf6; --ink:#1b1f3a;
+  --sun:#ffc93c; --mint:#3ed6a0; --coral:#ff6b6b; --sky:#7cc7ff; --grape:#a98bff; --muted:#aab6e6;
+  --display:"Fredoka","Comic Neue",system-ui,sans-serif;
+  --read:"Comic Neue","Comic Sans MS",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:#fff;font-family:var(--read);padding-inline:16px;padding-block:12px 28px;
+  background-image:radial-gradient(1px 1px at 10% 20%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 70% 10%,#fff6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 40% 60%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 85% 75%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 25% 85%,#fff5 50%,transparent 51%);background-size:300px 300px}
+.wrap{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+h1{font-family:var(--display);font-size:clamp(1.5rem,4vw,2.3rem);margin:0}
+h1 span{color:var(--sun)}
+.hud{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font-family:var(--display);border:2px solid var(--edge);background:var(--panel);color:#fff;border-radius:12px;padding:7px 12px;font-size:1.05rem;cursor:pointer}
+.btn.on{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.panel{background:var(--panel);border:2px solid var(--edge);border-radius:20px;padding:clamp(14px,3vw,24px);display:flex;flex-direction:column;gap:16px}
+.stats{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--display)}
+.rowlabel{font-size:1.3rem;color:var(--muted)}
+.rowlabel b{color:#fff}
+.clock{font-size:clamp(2.2rem,7vw,3.4rem);color:var(--sun);font-variant-numeric:tabular-nums;line-height:1}
+.best{font-size:1.1rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.best b{color:var(--mint)}
+.track{position:relative;height:64px;border-radius:999px;background:repeating-linear-gradient(90deg,#0f1a33 0 26px,#13213f 26px 52px);border:3px solid var(--edge);overflow:hidden}
+.track .lane{position:absolute;left:0;top:50%;height:4px;width:100%;background:repeating-linear-gradient(90deg,#fff3 0 14px,transparent 14px 28px);transform:translateY(-50%)}
+.rocket{position:absolute;top:50%;left:0;font-size:2.4rem;transform:translate(0,-50%) rotate(45deg);transition:left .35s cubic-bezier(.3,1.4,.6,1)}
+.flag{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:2rem}
+.ghost{position:absolute;top:6px;bottom:6px;width:4px;background:var(--mint);border-radius:4px;opacity:.8}
+.ghost::after{content:"best";position:absolute;top:-2px;left:8px;font-family:var(--display);font-size:.75rem;color:var(--mint)}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(3,1fr)}}
+.tile{background:var(--card);color:var(--ink);border:none;border-radius:18px;padding:22px 6px;font-family:var(--read);font-weight:700;font-size:clamp(1.8rem,4.6vw,2.8rem);cursor:pointer;box-shadow:0 6px 0 #0a1124;transition:transform .12s, background .2s;min-width:0}
+.tile.now{background:#fff1c2;outline:5px solid var(--sun);transform:translateY(-4px) scale(1.04)}
+.tile.good{background:var(--mint);color:#06402c;box-shadow:0 6px 0 #16805f}
+.tile.miss{animation:shake .35s}
+.tile.wait{opacity:.55}
+.controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.big{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,3.6vw,1.7rem);border:none;border-radius:16px;padding:14px 26px;cursor:pointer;color:var(--ink)}
+.go{background:var(--sun);box-shadow:0 5px 0 #c77a12}
+.oops{background:var(--coral);color:#fff;box-shadow:0 5px 0 #b8383f}
+.soft{background:transparent;color:#fff;border:2px solid var(--edge)}
+.bi
